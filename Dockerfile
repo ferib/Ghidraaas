@@ -1,7 +1,6 @@
 # This Dockerfile is a modified version of https://github.com/bskaggs/ghidra-docker/blob/master/Dockerfile
 
 FROM openjdk:11-slim
-MAINTAINER anmarcel "anmarcel@cisco.com"
 
 ARG GHIDRA_URL=https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_9.1.2_build/ghidra_9.1.2_PUBLIC_20200212.zip
 ARG GHIDRA_SHA256=ebe3fa4e1afd7d97650990b27777bb78bd0427e8e70c1d0ee042aeb52decac61
@@ -23,6 +22,7 @@ RUN apt-get install -y libgtk2.0 libidn11 libglu1-mesa
 WORKDIR /opt
 RUN apt-get update && apt-get install -y wget gettext-base patch && \
     wget -q -O ghidra.zip ${GHIDRA_URL}
+
 RUN echo "${GHIDRA_SHA256} *ghidra.zip" | sha256sum -c && \
     unzip ghidra.zip && \
     rm ghidra.zip && \
